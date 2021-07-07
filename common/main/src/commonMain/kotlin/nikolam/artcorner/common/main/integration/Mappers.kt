@@ -1,7 +1,7 @@
-package example.todo.common.main.integration
+package nikolam.artcorner.common.main.integration
 
-import example.todo.common.main.TodoMain.Model
-import example.todo.common.main.store.TodoMainStore.State
+import nikolam.artcorner.common.main.ArtMain.Model
+import nikolam.artcorner.common.main.store.ArtMainStore.State
 
 internal val stateToModel: (State) -> Model =
     {

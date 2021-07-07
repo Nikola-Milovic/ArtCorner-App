@@ -1,19 +1,18 @@
 @file:Suppress("EXPERIMENTAL_API_USAGE")
 
-package example.todo.common.ui
+package nikolam.artcorner.common.ui
 
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.extensions.compose.jetbrains.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.animation.child.crossfadeScale
-import example.todo.common.root.TodoRoot
-import example.todo.common.root.TodoRoot.Child
+import nikolam.artcorner.common.root.ArtRoot
+import nikolam.artcorner.common.root.ArtRoot.Child
 
 @Composable
-fun TodoRootContent(component: TodoRoot) {
+fun ArtRootContent(component: ArtRoot) {
     Children(routerState = component.routerState, animation = crossfadeScale()) {
         when (val child = it.instance) {
-            is Child.Main -> TodoMainContent(child.component)
-            is Child.Edit -> TodoEditContent(child.component)
+            is Child.Main -> ArtMainContent(child.component)
         }
     }
 }

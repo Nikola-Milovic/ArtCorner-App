@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     id("multiplatform-setup")
     id("android-setup")
+    id("kotlin-parcelize")
 }
 
 kotlin {
@@ -10,7 +11,7 @@ kotlin {
         named("commonMain") {
             dependencies {
                 implementation(project(":common:utils"))
-                implementation(project(":common:database"))
+//                implementation(project(":common:database"))
                 implementation(Deps.ArkIvanov.Decompose.decompose)
                 implementation(Deps.ArkIvanov.MVIKotlin.mvikotlin)
                 implementation(Deps.ArkIvanov.MVIKotlin.mvikotlinExtensionsReaktive)

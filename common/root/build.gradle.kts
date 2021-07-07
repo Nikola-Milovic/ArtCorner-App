@@ -12,7 +12,7 @@ kotlin {
             framework {
                 baseName = "ArtCorner"
                 linkerOpts.add("-lsqlite3")
-                export(project(":common:database"))
+//                export(project(":common:database"))
                 export(project(":common:main"))
 //                export(project(":common:edit"))
                 export(Deps.ArkIvanov.Decompose.decompose)
@@ -25,7 +25,7 @@ kotlin {
         named("commonMain") {
             dependencies {
                 implementation(project(":common:utils"))
-                implementation(project(":common:database"))
+       //         implementation(project(":common:database"))
                 implementation(project(":common:main"))
 //                implementation(project(":common:edit"))
                 implementation(Deps.ArkIvanov.MVIKotlin.mvikotlin)
@@ -38,7 +38,7 @@ kotlin {
     sourceSets {
         named("iosMain") {
             dependencies {
-                api(project(":common:database"))
+          //      api(project(":common:database"))
                 api(project(":common:main"))
    //             api(project(":common:edit"))
                 api(Deps.ArkIvanov.Decompose.decompose)
