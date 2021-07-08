@@ -2,14 +2,11 @@ package nikolam.artcorner.common.root.integration
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.RouterState
-import com.arkivanov.decompose.pop
-import com.arkivanov.decompose.push
 import com.arkivanov.decompose.router
 import com.arkivanov.decompose.statekeeper.Parcelable
 import com.arkivanov.decompose.statekeeper.Parcelize
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.badoo.reaktive.base.Consumer
 import nikolam.artcorner.common.main.ArtMain
 import nikolam.artcorner.common.main.integration.ArtMainComponent
 import nikolam.artcorner.common.root.ArtRoot

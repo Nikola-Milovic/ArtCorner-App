@@ -12,7 +12,7 @@ internal class ArtMainStoreProvider(
     fun provide(): ArtMainStore =
         object : ArtMainStore, Store<Intent, State, Nothing> by storeFactory.create(
             name = "ArtMainStore",
-            initialState = ArtMainStore.State(),
+            initialState = State(),
             bootstrapper = SimpleBootstrapper(Unit),
             executorFactory = ::ExecutorImpl,
             reducer = ReducerImpl
@@ -24,14 +24,21 @@ internal class ArtMainStoreProvider(
 
     private inner class ExecutorImpl : ReaktiveExecutor<Intent, Unit, State, Result, Nothing>() {
         override fun executeAction(action: Unit, getState: () -> State) {
-            dispatch(Result.ItemsLoaded(items = listOf(
-                GroupItem(1,  "1"),
-                GroupItem(2,  "2"),
-                GroupItem(3,  "3"))))
+            dispatch(
+                Result.ItemsLoaded(
+                    items = listOf(
+                        GroupItem(1, "1"),
+                        GroupItem(2, "2"),
+                        GroupItem(3, "3")
+                    )
+                )
+            )
         }
+
         override fun executeIntent(intent: Intent, getState: () -> State): Unit =
             when (intent) {
-                else -> {}
+                else -> {
+                }
             }
     }
 

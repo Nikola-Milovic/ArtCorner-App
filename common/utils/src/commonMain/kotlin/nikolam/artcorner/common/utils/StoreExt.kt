@@ -1,4 +1,4 @@
-package example.todo.common.utils
+package nikolam.artcorner.common.utils
 
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.ValueObserver

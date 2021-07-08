@@ -3,5 +3,7 @@ include(
     ":common:utils",
     ":common:compose-ui",
     ":common:main",
+    ":common:create",
+    ":common:details",
     ":android"
 )

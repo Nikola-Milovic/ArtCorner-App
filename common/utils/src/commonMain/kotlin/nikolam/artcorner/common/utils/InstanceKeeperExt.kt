@@ -1,4 +1,4 @@
-package example.todo.common.utils
+package nikolam.artcorner.common.utils
 
 import com.arkivanov.decompose.instancekeeper.InstanceKeeper
 import com.arkivanov.decompose.instancekeeper.getOrCreate

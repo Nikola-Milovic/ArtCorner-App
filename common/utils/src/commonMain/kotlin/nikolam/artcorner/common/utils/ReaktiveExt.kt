@@ -1,4 +1,4 @@
-package example.todo.common.utils
+package nikolam.artcorner.common.utils
 
 import com.badoo.reaktive.base.Consumer
 

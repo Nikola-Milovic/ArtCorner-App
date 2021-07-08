@@ -1,24 +1,54 @@
 package nikolam.artcorner.common.main.integration
 
-import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.RouterState
+import com.arkivanov.decompose.*
 import com.arkivanov.decompose.push
-import com.arkivanov.decompose.router
 import com.arkivanov.decompose.statekeeper.Parcelable
 import com.arkivanov.decompose.statekeeper.Parcelize
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.operator.map
 import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.badoo.reaktive.base.Consumer
+import nikolam.artcorner.common.create.ArtCreate
+import nikolam.artcorner.common.create.integration.ArtCreateComponent
+import nikolam.artcorner.common.details.ArtDetails
+import nikolam.artcorner.common.details.integration.ArtDetailsComponent
 import nikolam.artcorner.common.main.ArtMain
 import nikolam.artcorner.common.main.store.ArtMainStoreProvider
-import example.todo.common.utils.asValue
-import example.todo.common.utils.getStore
+import nikolam.artcorner.common.utils.asValue
+import nikolam.artcorner.common.utils.getStore
 import nikolam.artcorner.common.main.ArtMain.*
+import nikolam.artcorner.common.utils.Consumer
 
 class ArtMainComponent(
     componentContext: ComponentContext,
-    storeFactory: StoreFactory
+    storeFactory: StoreFactory,
+    private val artCreate: (ComponentContext, Consumer<ArtCreate.Output>) -> ArtCreate,
+    private val artDetail: (ComponentContext, groupId: Long, Consumer<ArtDetails.Output>) -> ArtDetails
 ) : ArtMain, ComponentContext by componentContext {
+
+    constructor(
+        componentContext: ComponentContext,
+        storeFactory: StoreFactory,
+    ) : this(
+        componentContext = componentContext,
+        storeFactory = storeFactory,
+        artCreate = { childContext, output ->
+            ArtCreateComponent(
+                componentContext = childContext,
+                storeFactory = storeFactory,
+                output = output
+            )
+        },
+        artDetail = { childContext, groupId, output ->
+            ArtDetailsComponent(
+                componentContext = childContext,
+                storeFactory = storeFactory,
+                output = output,
+                id = groupId
+            )
+        }
+    )
+
 
     private val store =
         instanceKeeper.getStore {
@@ -29,31 +59,59 @@ class ArtMainComponent(
 
     override val models: Value<Model> = store.asValue().map(stateToModel)
 
-    private val router = router<Configuration, Child>(
-            initialConfiguration = Configuration.Nothing,
-            handleBackButton = true,
-            childFactory = ::createChild
+    private val router = router<Configuration, ArtMain.Child>(
+        initialConfiguration = Configuration.Nothing,
+        handleBackButton = true,
+        childFactory = ::createChild
     )
 
-    override val routerState: Value<RouterState<*, Child>> = router.state
+    override val routerState: Value<RouterState<*, ArtMain.Child>> = router.state
 
-    private fun createChild(configuration: Configuration, componentContext: ComponentContext): Child =
+    private fun createChild(
+        configuration: Configuration,
+        componentContext: ComponentContext
+    ): ArtMain.Child =
         when (configuration) {
-            is Configuration.NewGroup -> Child.NewGroup
-            is Configuration.GroupDetails ->  Child.GroupDetails
-            is Configuration.Nothing ->  Child.Nothing
+            is Configuration.Create -> ArtMain.Child.Create(
+                artCreate(
+                    componentContext,
+                    Consumer(::onCreateOutput)
+                )
+            )
+            is Configuration.Details -> ArtMain.Child.Details(
+                artDetail(
+                    componentContext,
+                    configuration.id,
+                    Consumer(::onDetailsOutput)
+                )
+            )
+            is Configuration.Nothing -> ArtMain.Child.Nothing
         }
 
-    override fun navigateToNewGroup() {
-        router.push(Configuration.NewGroup)
+    override fun navigateToCreateGroup() {
+        router.push(Configuration.Create)
     }
 
-    private sealed class Configuration : Parcelable{
+    override fun navigateToDetailsGroup(id: Long) {
+        router.push(Configuration.Details(id))
+    }
+
+    private fun onCreateOutput(output: ArtCreate.Output): Unit =
+        when (output) {
+            is ArtCreate.Output.Closed -> router.pop()
+        }
+
+    private fun onDetailsOutput(output: ArtDetails.Output): Unit =
+        when (output) {
+            is ArtDetails.Output.Closed -> router.pop()
+        }
+
+    private sealed class Configuration : Parcelable {
         @Parcelize
-        object NewGroup : Configuration()
+        object Create : Configuration()
 
         @Parcelize
-        object GroupDetails : Configuration()
+        data class Details(val id: Long) : Configuration()
 
         @Parcelize
         object Nothing : Configuration()
