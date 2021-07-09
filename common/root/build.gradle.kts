@@ -25,7 +25,7 @@ kotlin {
         named("commonMain") {
             dependencies {
                 implementation(project(":common:utils"))
-       //         implementation(project(":common:database"))
+                //         implementation(project(":common:database"))
                 implementation(project(":common:main"))
 //                implementation(project(":common:edit"))
                 implementation(Deps.ArkIvanov.MVIKotlin.mvikotlin)
@@ -38,9 +38,9 @@ kotlin {
     sourceSets {
         named("iosMain") {
             dependencies {
-          //      api(project(":common:database"))
+                //      api(project(":common:database"))
                 api(project(":common:main"))
-   //             api(project(":common:edit"))
+                //             api(project(":common:edit"))
                 api(Deps.ArkIvanov.Decompose.decompose)
                 api(Deps.ArkIvanov.MVIKotlin.mvikotlinMain)
             }
@@ -58,7 +58,8 @@ val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
     val targetName = getIosTarget()
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
+    val framework =
+        kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
     val targetDir = File(buildDir, "xcode-frameworks")

@@ -7,7 +7,8 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.badoo.reaktive.base.Consumer
 import com.badoo.reaktive.base.invoke
 import nikolam.artcorner.common.details.ArtDetails
-import nikolam.artcorner.common.details.ArtDetails.*
+import nikolam.artcorner.common.details.ArtDetails.Model
+import nikolam.artcorner.common.details.ArtDetails.Output
 import nikolam.artcorner.common.details.store.ArtDetailsStoreProvider
 import nikolam.artcorner.common.utils.asValue
 import nikolam.artcorner.common.utils.getStore

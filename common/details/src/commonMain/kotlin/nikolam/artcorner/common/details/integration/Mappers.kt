@@ -1,7 +1,7 @@
 package nikolam.artcorner.common.details.integration
 
-import nikolam.artcorner.common.details.ArtDetails.*
-import nikolam.artcorner.common.details.store.ArtDetailsStore.*
+import nikolam.artcorner.common.details.ArtDetails.Model
+import nikolam.artcorner.common.details.store.ArtDetailsStore.State
 
 internal val stateToModel: (State) -> Model =
     {

@@ -7,7 +7,8 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.badoo.reaktive.base.Consumer
 import com.badoo.reaktive.base.invoke
 import nikolam.artcorner.common.create.ArtCreate
-import nikolam.artcorner.common.create.ArtCreate.*
+import nikolam.artcorner.common.create.ArtCreate.Model
+import nikolam.artcorner.common.create.ArtCreate.Output
 import nikolam.artcorner.common.create.store.ArtCreateStoreProvider
 import nikolam.artcorner.common.utils.asValue
 import nikolam.artcorner.common.utils.getStore
@@ -28,7 +29,7 @@ class ArtCreateComponent(
     override val models: Value<Model> = store.asValue().map(stateToModel)
 
     override fun closeCreation() {
-       output(Output.Closed)
+        output(Output.Closed)
     }
 
     override fun finishCreation() {

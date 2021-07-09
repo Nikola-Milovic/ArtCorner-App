@@ -15,6 +15,15 @@ object Deps {
             // __LATEST_COMPOSE_RELEASE_VERSION__
             private const val VERSION = "0.5.0-build225"
             const val gradlePlugin = "org.jetbrains.compose:compose-gradle-plugin:$VERSION"
+            const val material = "androidx.compose.material:material:$VERSION"
+        }
+    }
+
+    object Google {
+        object Accompanist {
+            const val VERSION ="0.13.0"
+            const val pager = "com.google.accompanist:accompanist-pager:$VERSION"
+            const val pagerIndicators = "com.google.accompanist:accompanist-pager-indicators:$VERSION"
         }
     }
 

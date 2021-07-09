@@ -10,7 +10,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import nikolam.artcorner.common.main.ArtMain
 import nikolam.artcorner.common.main.integration.ArtMainComponent
 import nikolam.artcorner.common.root.ArtRoot
-import nikolam.artcorner.common.root.ArtRoot.*
+import nikolam.artcorner.common.root.ArtRoot.Child
 
 class ArtRootComponent internal constructor(
     componentContext: ComponentContext,

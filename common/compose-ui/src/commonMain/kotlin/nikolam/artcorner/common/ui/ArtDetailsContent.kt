@@ -19,9 +19,9 @@ fun ArtDetailsContent(component: ArtDetails) {
         TopAppBar(title = { Text(text = "Details") })
 
         Box(Modifier.weight(1F)) {
-           Text(model.text)
+            Text(model.text)
 
-            Button(onClick = {component.closeDetails()}, content = { Text("Close")})
+            Button(onClick = { component.closeDetails() }, content = { Text("Close") })
         }
     }
 }

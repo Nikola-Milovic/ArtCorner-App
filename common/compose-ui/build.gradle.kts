@@ -14,6 +14,16 @@ kotlin {
                 implementation(project(":common:root"))
                 implementation(Deps.ArkIvanov.Decompose.decompose)
                 implementation(Deps.ArkIvanov.Decompose.extensionsCompose)
+
+                implementation(Deps.Google.Accompanist.pager)
+            }
+        }
+
+        named("androidMain") {
+            dependencies {
+                implementation(Deps.JetBrains.Compose.material)
+                implementation(Deps.Google.Accompanist.pager)
+                implementation(Deps.Google.Accompanist.pagerIndicators)
             }
         }
     }

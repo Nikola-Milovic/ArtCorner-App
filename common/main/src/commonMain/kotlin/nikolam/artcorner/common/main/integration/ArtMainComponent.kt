@@ -1,7 +1,6 @@
 package nikolam.artcorner.common.main.integration
 
 import com.arkivanov.decompose.*
-import com.arkivanov.decompose.push
 import com.arkivanov.decompose.statekeeper.Parcelable
 import com.arkivanov.decompose.statekeeper.Parcelize
 import com.arkivanov.decompose.value.Value
@@ -13,11 +12,11 @@ import nikolam.artcorner.common.create.integration.ArtCreateComponent
 import nikolam.artcorner.common.details.ArtDetails
 import nikolam.artcorner.common.details.integration.ArtDetailsComponent
 import nikolam.artcorner.common.main.ArtMain
+import nikolam.artcorner.common.main.ArtMain.Model
 import nikolam.artcorner.common.main.store.ArtMainStoreProvider
+import nikolam.artcorner.common.utils.Consumer
 import nikolam.artcorner.common.utils.asValue
 import nikolam.artcorner.common.utils.getStore
-import nikolam.artcorner.common.main.ArtMain.*
-import nikolam.artcorner.common.utils.Consumer
 
 class ArtMainComponent(
     componentContext: ComponentContext,

@@ -1,10 +1,13 @@
 package nikolam.artcorner.common.main.store
 
-import com.arkivanov.mvikotlin.core.store.*
+import com.arkivanov.mvikotlin.core.store.Reducer
+import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
+import com.arkivanov.mvikotlin.core.store.Store
+import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.reaktive.ReaktiveExecutor
 import nikolam.artcorner.common.main.GroupItem
-import nikolam.artcorner.common.main.store.ArtMainStore.State
 import nikolam.artcorner.common.main.store.ArtMainStore.Intent
+import nikolam.artcorner.common.main.store.ArtMainStore.State
 
 internal class ArtMainStoreProvider(
     private val storeFactory: StoreFactory,

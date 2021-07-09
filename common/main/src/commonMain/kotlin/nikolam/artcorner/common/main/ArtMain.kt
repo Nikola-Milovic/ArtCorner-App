@@ -12,7 +12,7 @@ interface ArtMain {
     val routerState: Value<RouterState<*, Child>>
 
     fun navigateToCreateGroup()
-    fun navigateToDetailsGroup(id : Long)
+    fun navigateToDetailsGroup(id: Long)
 
     data class Model(
         val items: List<GroupItem>,
@@ -20,8 +20,8 @@ interface ArtMain {
     )
 
     sealed class Child {
-        data class Create(val component : ArtCreate) : Child()
-        data class Details(val component : ArtDetails) : Child()
+        data class Create(val component: ArtCreate) : Child()
+        data class Details(val component: ArtDetails) : Child()
         object Nothing : Child()
     }
 }
