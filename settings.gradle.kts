@@ -5,5 +5,7 @@ include(
     ":common:main",
     ":common:create",
     ":common:details",
-    ":android"
+    ":android",
+    ":common:di",
+    ":common:data"
 )

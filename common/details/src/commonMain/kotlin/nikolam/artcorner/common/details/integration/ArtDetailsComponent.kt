@@ -17,14 +17,16 @@ class ArtDetailsComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
     private val output: Consumer<Output>,
-    private val id: Long
+    private val gid: String,
+    private val justCreated : Boolean = false
 ) : ArtDetails, ComponentContext by componentContext {
 
     private val store =
         instanceKeeper.getStore {
             ArtDetailsStoreProvider(
                 storeFactory = storeFactory,
-                id = id
+                gid = gid,
+                justCreated = justCreated
             ).provide()
         }
 

@@ -12,7 +12,7 @@ interface ArtMain {
     val routerState: Value<RouterState<*, Child>>
 
     fun navigateToCreateGroup()
-    fun navigateToDetailsGroup(id: Long)
+    fun navigateToDetailsGroup(gid: String)
 
     data class Model(
         val items: List<GroupItem>,

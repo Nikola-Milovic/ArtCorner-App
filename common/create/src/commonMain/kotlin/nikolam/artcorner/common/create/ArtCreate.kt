@@ -3,7 +3,6 @@ package nikolam.artcorner.common.create
 import com.arkivanov.decompose.value.Value
 
 interface ArtCreate {
-
     val models: Value<Model>
 
     fun closeCreation()
@@ -15,5 +14,6 @@ interface ArtCreate {
 
     sealed class Output {
         object Closed : Output()
+        data class CreatedGroup(val gid : String) : Output()
     }
 }

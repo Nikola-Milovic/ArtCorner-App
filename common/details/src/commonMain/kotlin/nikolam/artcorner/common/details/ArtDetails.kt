@@ -9,7 +9,9 @@ interface ArtDetails {
     fun closeDetails()
 
     data class Model(
-        val text: String
+       val isOwner : Boolean,
+       val isVerified : Boolean,
+       val gid : String
     )
 
     sealed class Output {

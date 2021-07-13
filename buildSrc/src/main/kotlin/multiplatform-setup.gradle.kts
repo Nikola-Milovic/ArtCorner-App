@@ -1,3 +1,5 @@
+import org.jetbrains.compose.compose
+
 plugins {
     id("com.android.library")
     id("kotlin-multiplatform")
@@ -13,26 +15,48 @@ kotlin {
     }
 
     sourceSets {
-        named("commonTest") {
+        named("commonMain") {
             dependencies {
-                implementation(Deps.JetBrains.Kotlin.testCommon)
-                implementation(Deps.JetBrains.Kotlin.testAnnotationsCommon)
+                implementation(Deps.Kotlin.testCommon)
+                implementation(Deps.Kotlin.testAnnotationsCommon)
+
+                // Decompose
+                implementation(Deps.Decompose.decompose)
+
+                // MVI
+                implementation(Deps.MVIKotlin.rx)
+                implementation(Deps.MVIKotlin.mvikotlin)
+
+                // Koin
+                implementation(Deps.Koin.core)
+
+                implementation(Deps.Ktor.auth)
+                implementation(Deps.Ktor.clientJson)
+                implementation(Deps.Ktor.clientCore)
+                implementation(Deps.Ktor.clientLogging)
+                implementation(Deps.Ktor.clientSerialization)
+
+                // Extras
+                implementation(Deps.Extras.kermit)
+                implementation(Deps.Serialization.json)
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt") {
+                    @Suppress("DEPRECATION")
+                    isForce = true
+                }
             }
         }
 
-        named("androidTest") {
+        named("androidMain") {
             dependencies {
-                implementation(Deps.JetBrains.Kotlin.testJunit)
-            }
-        }
-        named("desktopTest") {
-            dependencies {
-                implementation(Deps.JetBrains.Kotlin.testJunit)
-            }
-        }
-        named("jsTest") {
-            dependencies {
-                implementation(Deps.JetBrains.Kotlin.testJs)
+                implementation("androidx.appcompat:appcompat:1.3.0")
+                implementation(Deps.AndroidX.core)
+                implementation(compose.runtime)
+                implementation(compose.material)
+                implementation(compose.foundation)
+                implementation(compose.materialIconsExtended)
+                implementation(Deps.Decompose.extensionsCompose)
+                implementation(Deps.Ktor.clientAndroid)
+                implementation(Deps.Koin.android)
             }
         }
     }

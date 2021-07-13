@@ -22,7 +22,7 @@ class ArtMainComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
     private val artCreate: (ComponentContext, Consumer<ArtCreate.Output>) -> ArtCreate,
-    private val artDetail: (ComponentContext, groupId: Long, Consumer<ArtDetails.Output>) -> ArtDetails
+    private val artDetail: (ComponentContext, groupId: String, Consumer<ArtDetails.Output>) -> ArtDetails
 ) : ArtMain, ComponentContext by componentContext {
 
     constructor(
@@ -43,11 +43,10 @@ class ArtMainComponent(
                 componentContext = childContext,
                 storeFactory = storeFactory,
                 output = output,
-                id = groupId
+                gid = groupId
             )
         }
     )
-
 
     private val store =
         instanceKeeper.getStore {
@@ -80,7 +79,7 @@ class ArtMainComponent(
             is Configuration.Details -> ArtMain.Child.Details(
                 artDetail(
                     componentContext,
-                    configuration.id,
+                    configuration.gid,
                     Consumer(::onDetailsOutput)
                 )
             )
@@ -91,8 +90,8 @@ class ArtMainComponent(
         router.push(Configuration.Create)
     }
 
-    override fun navigateToDetailsGroup(id: Long) {
-        router.push(Configuration.Details(id))
+    override fun navigateToDetailsGroup(gid: String) {
+        router.push(Configuration.Details(gid))
     }
 
     private fun onCreateOutput(output: ArtCreate.Output): Unit =
@@ -110,7 +109,7 @@ class ArtMainComponent(
         object Create : Configuration()
 
         @Parcelize
-        data class Details(val id: Long) : Configuration()
+        data class Details(val gid: String) : Configuration()
 
         @Parcelize
         object Nothing : Configuration()

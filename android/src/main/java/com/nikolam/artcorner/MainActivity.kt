@@ -21,13 +21,13 @@ class MainActivity : AppCompatActivity() {
         setContent {
             ComposeAppTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    ArtRootContent(rememberRootComponent(::todoRoot))
+                    ArtRootContent(rememberRootComponent(::artRoot))
                 }
             }
         }
     }
 
-    private fun todoRoot(componentContext: ComponentContext): ArtRoot =
+    private fun artRoot(componentContext: ComponentContext): ArtRoot =
         ArtRootComponent(
             componentContext = componentContext,
             storeFactory = LoggingStoreFactory(TimeTravelStoreFactory(DefaultStoreFactory)),

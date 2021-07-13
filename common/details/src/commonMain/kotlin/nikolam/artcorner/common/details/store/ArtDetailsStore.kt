@@ -9,6 +9,9 @@ internal interface ArtDetailsStore : Store<Intent, State, Nothing> {
     sealed class Intent {}
 
     data class State(
-        val text: String = ""
+        val gid: String = "",
+        val verified : Boolean = false,
+        val ownerId : String = "",
+        val userId : String = ""
     )
 }

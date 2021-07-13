@@ -10,7 +10,8 @@ import nikolam.artcorner.common.details.store.ArtDetailsStore.State
 
 internal class ArtDetailsStoreProvider(
     private val storeFactory: StoreFactory,
-    private val id: Long,
+    private val gid: String,
+    private val justCreated: Boolean,
 ) {
     fun provide(): ArtDetailsStore =
         object : ArtDetailsStore, Store<Intent, State, Nothing> by storeFactory.create(
@@ -21,9 +22,17 @@ internal class ArtDetailsStoreProvider(
             reducer = ReducerImpl
         ) {}
 
-    private sealed class Result {}
+    private sealed class Result {
+        object GroupJustCreated : Result()
+    }
 
     private inner class ExecutorImpl : ReaktiveExecutor<Intent, Unit, State, Result, Nothing>() {
+        override fun executeAction(action: Unit, getState: () -> State) {
+            if (justCreated) {
+                dispatch(Result.GroupJustCreated)
+            }
+        }
+
         override fun executeIntent(intent: Intent, getState: () -> State): Unit =
             when (intent) {
                 else -> {
@@ -34,6 +43,9 @@ internal class ArtDetailsStoreProvider(
     private object ReducerImpl : Reducer<State, Result> {
         override fun State.reduce(result: Result): State =
             when (result) {
+                Result.GroupJustCreated -> {
+                    copy(gid = gid, verified = false, ownerId = "123", userId = "123")
+                }
                 else -> {
                     copy()
                 }

@@ -30,15 +30,21 @@ dependencies {
 //    implementation(project(":common:database"))
 //    implementation(project(":common:utils"))
     implementation(project(":common:root"))
+    implementation(project(":common:di"))
     implementation(project(":common:compose-ui"))
 
+    // Koin
+    implementation(Deps.Koin.android)
+    implementation(Deps.Koin.compose)
+
     implementation(compose.material)
-    implementation(Deps.ArkIvanov.MVIKotlin.mvikotlin)
-    implementation(Deps.ArkIvanov.MVIKotlin.mvikotlinMain)
-    implementation(Deps.ArkIvanov.MVIKotlin.mvikotlinLogging)
-    implementation(Deps.ArkIvanov.MVIKotlin.mvikotlinTimeTravel)
-    implementation(Deps.ArkIvanov.Decompose.decompose)
-    implementation(Deps.ArkIvanov.Decompose.extensionsCompose)
+
+    implementation(Deps.MVIKotlin.mvikotlin)
+    implementation(Deps.MVIKotlin.mvikotlinMain)
+    implementation(Deps.MVIKotlin.mvikotlinLogging)
+    implementation(Deps.MVIKotlin.mvikotlinTimeTravel)
+    implementation(Deps.Decompose.decompose)
+    implementation(Deps.Decompose.extensionsCompose)
     implementation(Deps.AndroidX.AppCompat.appCompat)
     implementation(Deps.AndroidX.Activity.activityCompose)
 }

@@ -6,6 +6,8 @@ import nikolam.artcorner.common.details.store.ArtDetailsStore.State
 internal val stateToModel: (State) -> Model =
     {
         Model(
-            text = it.text
+            isOwner = it.ownerId == it.userId,
+            isVerified = it.verified,
+            gid = it.gid
         )
     }

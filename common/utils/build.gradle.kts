@@ -7,9 +7,9 @@ kotlin {
     sourceSets {
         named("commonMain") {
             dependencies {
-                implementation(Deps.ArkIvanov.MVIKotlin.rx)
-                implementation(Deps.ArkIvanov.MVIKotlin.mvikotlin)
-                implementation(Deps.ArkIvanov.Decompose.decompose)
+                implementation(Deps.MVIKotlin.rx)
+                implementation(Deps.MVIKotlin.mvikotlin)
+                implementation(Deps.Decompose.decompose)
                 implementation(Deps.Badoo.Reaktive.reaktive)
             }
         }

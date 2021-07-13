@@ -57,7 +57,7 @@ private fun HomeView(component: ArtMain) {
 @Composable
 private fun GroupList(
     items: List<GroupItem>,
-    onItemClicked: (id: Long) -> Unit
+    onItemClicked: (gid: String) -> Unit
 ) {
     Box {
         val listState = rememberLazyListState()
@@ -78,9 +78,9 @@ private fun GroupList(
 @Composable
 private fun Item(
     item: GroupItem,
-    onItemClicked: (id: Long) -> Unit
+    onItemClicked: (gid: String) -> Unit
 ) {
-    Box(modifier = Modifier.padding(10.dp).clickable { onItemClicked(item.id) }) {
+    Box(modifier = Modifier.padding(10.dp).clickable { onItemClicked(item.gid) }) {
         Text(item.text)
     }
 }

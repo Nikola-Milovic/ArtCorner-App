@@ -15,8 +15,8 @@ kotlin {
 //                export(project(":common:database"))
                 export(project(":common:main"))
 //                export(project(":common:edit"))
-                export(Deps.ArkIvanov.Decompose.decompose)
-                export(Deps.ArkIvanov.MVIKotlin.mvikotlinMain)
+                export(Deps.Decompose.decompose)
+                export(Deps.MVIKotlin.mvikotlinMain)
             }
         }
     }
@@ -28,8 +28,8 @@ kotlin {
                 //         implementation(project(":common:database"))
                 implementation(project(":common:main"))
 //                implementation(project(":common:edit"))
-                implementation(Deps.ArkIvanov.MVIKotlin.mvikotlin)
-                implementation(Deps.ArkIvanov.Decompose.decompose)
+                implementation(Deps.MVIKotlin.mvikotlin)
+                implementation(Deps.Decompose.decompose)
                 implementation(Deps.Badoo.Reaktive.reaktive)
             }
         }
@@ -41,8 +41,8 @@ kotlin {
                 //      api(project(":common:database"))
                 api(project(":common:main"))
                 //             api(project(":common:edit"))
-                api(Deps.ArkIvanov.Decompose.decompose)
-                api(Deps.ArkIvanov.MVIKotlin.mvikotlinMain)
+                api(Deps.Decompose.decompose)
+                api(Deps.MVIKotlin.mvikotlinMain)
             }
         }
     }

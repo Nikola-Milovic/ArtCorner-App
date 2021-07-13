@@ -30,9 +30,9 @@ internal class ArtMainStoreProvider(
             dispatch(
                 Result.ItemsLoaded(
                     items = listOf(
-                        GroupItem(1, "1"),
-                        GroupItem(2, "2"),
-                        GroupItem(3, "3")
+                        GroupItem("123456-123", "TestGroup1"),
+                        GroupItem("123456-1234", "TestGroup2"),
+                        GroupItem("123456-12345", "TestGroup3")
                     )
                 )
             )
