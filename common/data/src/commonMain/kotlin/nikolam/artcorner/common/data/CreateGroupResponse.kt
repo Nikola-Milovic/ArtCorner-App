@@ -1,3 +1,6 @@
 package nikolam.artcorner.common.data
 
-data class CreateGroupResponse (val gid : String)
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class CreateGroupResponse (var status : Int = -1, val gid : String)

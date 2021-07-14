@@ -1,4 +1,4 @@
-package nikolam.artcorner.common.ui
+package nikolam.artcorner.common.ui.main
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -19,6 +19,8 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.animation.child.cros
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import nikolam.artcorner.common.main.ArtMain
 import nikolam.artcorner.common.main.GroupItem
+import nikolam.artcorner.common.ui.create.ArtCreateContent
+import nikolam.artcorner.common.ui.details.ArtDetailsContent
 
 @Composable
 fun ArtMainContent(component: ArtMain) {

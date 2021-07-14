@@ -81,13 +81,16 @@ class ArtMainComponent(
         router.push(Configuration.Create)
     }
 
-    override fun navigateToDetailsGroup(gid: String, justCreated: Boolean) {
-        router.push(Configuration.Details(gid,justCreated))
+    override fun navigateToDetailsGroup(gid: String) {
+        router.push(Configuration.Details(gid, false))
     }
 
     private fun onCreateOutput(output: ArtCreate.Output): Unit =
         when (output) {
             is ArtCreate.Output.Closed -> router.pop()
+            is ArtCreate.Output.CreatedGroup -> {
+                router.replaceCurrent(Configuration.Details(output.gid,true))
+            }
             else -> {}
         }
 

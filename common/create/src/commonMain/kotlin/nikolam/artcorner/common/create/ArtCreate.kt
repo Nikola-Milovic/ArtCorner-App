@@ -11,7 +11,7 @@ interface ArtCreate {
     val models: Value<Model>
 
     fun closeCreation()
-    fun finishCreation()
+    fun finishCreation(maxMembers : Int)
 
     data class Model(
         val text: String

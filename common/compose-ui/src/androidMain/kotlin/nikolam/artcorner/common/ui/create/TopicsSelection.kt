@@ -1,4 +1,4 @@
-package nikolam.artcorner.common.ui
+package nikolam.artcorner.common.ui.create
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

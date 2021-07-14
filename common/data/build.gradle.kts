@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     id("multiplatform-setup")
     id("android-setup")
-    id("kotlin-parcelize")
+    kotlin("plugin.serialization") version "1.5.10"
 }
 
 kotlin {

@@ -1,4 +1,4 @@
-package nikolam.artcorner.common.ui
+package nikolam.artcorner.common.ui.utils
 
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEvent

@@ -15,11 +15,13 @@ class GroupApi (private val client : HttpClient) {
         data.put("maxMembers", 5)
 
         return singleFromCoroutine {
-            val response: HttpResponse = client.post("http://localhost:4000/groups") {
+            val response: HttpResponse = client.post("http://10.0.2.2:4000/local/groups") {
                 body = data.toString()
             }
 
             val decoded : CreateGroupResponse = response.receive()
+
+            decoded.status = response.status.value
 
             return@singleFromCoroutine decoded
         }

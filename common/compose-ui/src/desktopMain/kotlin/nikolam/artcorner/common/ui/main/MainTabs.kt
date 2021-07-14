@@ -1,4 +1,4 @@
-package nikolam.artcorner.common.ui
+package nikolam.artcorner.common.ui.main
 
 import androidx.compose.runtime.Composable
 

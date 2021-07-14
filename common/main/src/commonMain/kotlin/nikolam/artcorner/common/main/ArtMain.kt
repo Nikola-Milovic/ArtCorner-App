@@ -16,7 +16,7 @@ interface ArtMain {
     val routerState: Value<RouterState<*, Child>>
 
     fun navigateToCreateGroup()
-    fun navigateToDetailsGroup(gid: String, justCreated: Boolean = false)
+    fun navigateToDetailsGroup(gid: String)
 
     data class Model(
         val items: List<GroupItem>,

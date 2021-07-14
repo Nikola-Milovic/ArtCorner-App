@@ -1,4 +1,4 @@
-package nikolam.artcorner.common.ui
+package nikolam.artcorner.common.ui.create
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -44,7 +44,7 @@ fun ArtCreateContent(component: ArtCreate) {
                 .padding(5.dp), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CreationOptions(Modifier.weight(0.8f))
-            Button(onClick = {}, content = { Text("Create") })
+            Button(onClick = {component.finishCreation(5)}, content = { Text("Create") })
         }
     }
 }

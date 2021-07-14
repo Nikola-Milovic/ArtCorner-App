@@ -12,6 +12,7 @@ internal interface ArtDetailsStore : Store<Intent, State, Nothing> {
         val gid: String = "",
         val verified : Boolean = false,
         val ownerId : String = "",
-        val userId : String = ""
+        val userId : String = "",
+        val justCreated : Boolean = false
     )
 }

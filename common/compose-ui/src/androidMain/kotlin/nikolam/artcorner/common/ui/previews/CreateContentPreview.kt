@@ -5,9 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import kotlinx.coroutines.flow.StateFlow
 import nikolam.artcorner.common.create.ArtCreate
-import nikolam.artcorner.common.ui.ArtCreateContent
+import nikolam.artcorner.common.ui.create.ArtCreateContent
 
 @Preview(widthDp = 480, heightDp = 600, backgroundColor = 0xffffff, showBackground = true)
 @Composable
@@ -25,8 +24,7 @@ class ArtCreateComponentStub() : ArtCreate{
         TODO("Not yet implemented")
     }
 
-    override fun finishCreation() {
+    override fun finishCreation(maxMembers: Int) {
         TODO("Not yet implemented")
     }
-
 }

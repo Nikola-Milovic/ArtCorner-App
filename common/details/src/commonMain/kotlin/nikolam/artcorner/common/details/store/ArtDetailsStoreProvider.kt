@@ -1,5 +1,6 @@
 package nikolam.artcorner.common.details.store
 
+import co.touchlab.kermit.Logger
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
@@ -16,7 +17,7 @@ internal class ArtDetailsStoreProvider(
     fun provide(): ArtDetailsStore =
         object : ArtDetailsStore, Store<Intent, State, Nothing> by storeFactory.create(
             name = "ArtDetailsStore",
-            initialState = State(),
+            initialState = State(gid = gid, justCreated = justCreated),
             bootstrapper = SimpleBootstrapper(Unit),
             executorFactory = ::ExecutorImpl,
             reducer = ReducerImpl

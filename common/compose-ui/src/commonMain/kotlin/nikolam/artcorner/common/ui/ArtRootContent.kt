@@ -7,6 +7,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.animation.child.crossfadeScale
 import nikolam.artcorner.common.root.ArtRoot
 import nikolam.artcorner.common.root.ArtRoot.Child
+import nikolam.artcorner.common.ui.main.ArtMainContent
 
 @Composable
 fun ArtRootContent(component: ArtRoot) {
