@@ -11,6 +11,7 @@ kotlin {
         named("commonMain") {
             dependencies {
                 implementation(project(":common:utils"))
+                implementation(project(":common:data"))
 //                implementation(project(":common:database"))
                 implementation(Deps.Decompose.decompose)
                 implementation(Deps.MVIKotlin.mvikotlin)

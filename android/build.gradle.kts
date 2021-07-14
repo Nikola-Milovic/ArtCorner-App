@@ -31,6 +31,7 @@ dependencies {
 //    implementation(project(":common:utils"))
     implementation(project(":common:root"))
     implementation(project(":common:di"))
+    implementation(project(":common:data"))
     implementation(project(":common:compose-ui"))
 
     // Koin

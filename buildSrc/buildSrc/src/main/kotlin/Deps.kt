@@ -100,7 +100,8 @@ object Deps {
             const val reaktive = "com.badoo.reaktive:reaktive:$VERSION"
             const val reaktiveTesting = "com.badoo.reaktive:reaktive-testing:$VERSION"
             const val utils = "com.badoo.reaktive:utils:$VERSION"
-            const val coroutinesInterop = "com.badoo.reaktive:coroutines-interop:$VERSION"
+        //    const val coroutinesInterop = "com.badoo.reaktive:coroutines-interop:$VERSION"
+            const val coroutinesInterop = "com.badoo.reaktive:coroutines-interop:$VERSION-nmtc"
         }
     }
 

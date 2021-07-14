@@ -39,6 +39,7 @@ kotlin {
                 // Extras
                 implementation(Deps.Extras.kermit)
                 implementation(Deps.Serialization.json)
+                implementation("co.touchlab:stately-common:1.1.7")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt") {
                     @Suppress("DEPRECATION")
                     isForce = true

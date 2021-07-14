@@ -15,11 +15,10 @@ import nikolam.artcorner.common.utils.getStore
 
 class ArtDetailsComponent(
     componentContext: ComponentContext,
-    storeFactory: StoreFactory,
-    private val output: Consumer<Output>,
-    private val gid: String,
+    dependencies: ArtDetails.Dependencies,
+    private val gid : String,
     private val justCreated : Boolean = false
-) : ArtDetails, ComponentContext by componentContext {
+) : ArtDetails, ComponentContext by componentContext, ArtDetails.Dependencies by dependencies{
 
     private val store =
         instanceKeeper.getStore {

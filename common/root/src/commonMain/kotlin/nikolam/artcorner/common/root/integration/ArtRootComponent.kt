@@ -1,14 +1,14 @@
 package nikolam.artcorner.common.root.integration
 
+import co.touchlab.stately.ensureNeverFrozen
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.RouterState
 import com.arkivanov.decompose.router
 import com.arkivanov.decompose.statekeeper.Parcelable
 import com.arkivanov.decompose.statekeeper.Parcelize
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.mvikotlin.core.store.StoreFactory
 import nikolam.artcorner.common.main.ArtMain
-import nikolam.artcorner.common.main.integration.ArtMainComponent
+import nikolam.artcorner.common.main.ArtMainFactory
 import nikolam.artcorner.common.root.ArtRoot
 import nikolam.artcorner.common.root.ArtRoot.Child
 
@@ -19,16 +19,15 @@ class ArtRootComponent internal constructor(
 
     constructor(
         componentContext: ComponentContext,
-        storeFactory: StoreFactory,
+        dependencies: ArtRoot.Dependencies,
     ) : this(
         componentContext = componentContext,
         artMain = { childContext ->
-            ArtMainComponent(
-                componentContext = childContext,
-                storeFactory = storeFactory
-            )
+            artMain(componentContext = childContext, dependencies = dependencies)
         }
-    )
+    ) {
+        instanceKeeper.ensureNeverFrozen()
+    }
 
     private val router =
         router<Configuration, Child>(
@@ -51,4 +50,16 @@ class ArtRootComponent internal constructor(
         @Parcelize
         object Main : Configuration()
     }
+}
+
+private fun artMain(
+    componentContext: ComponentContext,
+    dependencies: ArtRoot.Dependencies
+): ArtMain {
+    return ArtMainFactory(
+        componentContext = componentContext,
+        dependencies = object : ArtMain.Dependencies, ArtRoot.Dependencies by dependencies {
+            override val userId: String = "test123"
+        }
+    )
 }

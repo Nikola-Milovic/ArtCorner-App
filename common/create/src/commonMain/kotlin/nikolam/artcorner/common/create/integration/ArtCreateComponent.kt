@@ -3,8 +3,6 @@ package nikolam.artcorner.common.create.integration
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.operator.map
-import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.badoo.reaktive.base.Consumer
 import com.badoo.reaktive.base.invoke
 import nikolam.artcorner.common.create.ArtCreate
 import nikolam.artcorner.common.create.ArtCreate.Model
@@ -15,9 +13,8 @@ import nikolam.artcorner.common.utils.getStore
 
 class ArtCreateComponent(
     componentContext: ComponentContext,
-    storeFactory: StoreFactory,
-    private val output: Consumer<Output>
-) : ArtCreate, ComponentContext by componentContext {
+    dependencies: ArtCreate.Dependencies
+) : ArtCreate, ComponentContext by componentContext, ArtCreate.Dependencies by dependencies {
 
     private val store =
         instanceKeeper.getStore {

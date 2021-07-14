@@ -5,12 +5,11 @@ import com.arkivanov.decompose.statekeeper.Parcelable
 import com.arkivanov.decompose.statekeeper.Parcelize
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.operator.map
-import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.badoo.reaktive.base.Consumer
 import nikolam.artcorner.common.create.ArtCreate
-import nikolam.artcorner.common.create.integration.ArtCreateComponent
+import nikolam.artcorner.common.create.ArtCreateFactory
 import nikolam.artcorner.common.details.ArtDetails
-import nikolam.artcorner.common.details.integration.ArtDetailsComponent
+import nikolam.artcorner.common.details.ArtDetailsFactory
 import nikolam.artcorner.common.main.ArtMain
 import nikolam.artcorner.common.main.ArtMain.Model
 import nikolam.artcorner.common.main.store.ArtMainStoreProvider
@@ -20,31 +19,22 @@ import nikolam.artcorner.common.utils.getStore
 
 class ArtMainComponent(
     componentContext: ComponentContext,
-    storeFactory: StoreFactory,
+    dependencies : ArtMain.Dependencies,
     private val artCreate: (ComponentContext, Consumer<ArtCreate.Output>) -> ArtCreate,
-    private val artDetail: (ComponentContext, groupId: String, Consumer<ArtDetails.Output>) -> ArtDetails
-) : ArtMain, ComponentContext by componentContext {
+    private val artDetail: (ComponentContext, groupId: String, justCreated : Boolean, Consumer<ArtDetails.Output>) -> ArtDetails
+) : ArtMain, ComponentContext by componentContext, ArtMain.Dependencies by dependencies {
 
     constructor(
         componentContext: ComponentContext,
-        storeFactory: StoreFactory,
+        dependencies: ArtMain.Dependencies,
     ) : this(
         componentContext = componentContext,
-        storeFactory = storeFactory,
+        dependencies = dependencies,
         artCreate = { childContext, output ->
-            ArtCreateComponent(
-                componentContext = childContext,
-                storeFactory = storeFactory,
-                output = output
-            )
+            artCreate(childContext, output, dependencies)
         },
-        artDetail = { childContext, groupId, output ->
-            ArtDetailsComponent(
-                componentContext = childContext,
-                storeFactory = storeFactory,
-                output = output,
-                gid = groupId
-            )
+        artDetail = { childContext, groupId, justCreated, output ->
+            artDetail(childContext, groupId, justCreated, output, dependencies)
         }
     )
 
@@ -80,6 +70,7 @@ class ArtMainComponent(
                 artDetail(
                     componentContext,
                     configuration.gid,
+                    configuration.justCreated,
                     Consumer(::onDetailsOutput)
                 )
             )
@@ -90,13 +81,14 @@ class ArtMainComponent(
         router.push(Configuration.Create)
     }
 
-    override fun navigateToDetailsGroup(gid: String) {
-        router.push(Configuration.Details(gid))
+    override fun navigateToDetailsGroup(gid: String, justCreated: Boolean) {
+        router.push(Configuration.Details(gid,justCreated))
     }
 
     private fun onCreateOutput(output: ArtCreate.Output): Unit =
         when (output) {
             is ArtCreate.Output.Closed -> router.pop()
+            else -> {}
         }
 
     private fun onDetailsOutput(output: ArtDetails.Output): Unit =
@@ -109,9 +101,32 @@ class ArtMainComponent(
         object Create : Configuration()
 
         @Parcelize
-        data class Details(val gid: String) : Configuration()
+        data class Details(val gid: String, val justCreated : Boolean) : Configuration()
 
         @Parcelize
         object Nothing : Configuration()
     }
 }
+
+private fun artCreate(componentContext: ComponentContext, output : Consumer<ArtCreate.Output>,dependencies: ArtMain.Dependencies) : ArtCreate {
+    return ArtCreateFactory(
+        componentContext = componentContext,
+        dependencies = object : ArtCreate.Dependencies, ArtMain.Dependencies by dependencies {
+            override val userId: String = "test123"
+            override val output: Consumer<ArtCreate.Output> = output
+        }
+    )
+}
+
+private fun artDetail(componentContext: ComponentContext, gid: String, justCreated: Boolean, output : Consumer<ArtDetails.Output>,dependencies: ArtMain.Dependencies) : ArtDetails {
+    return ArtDetailsFactory(
+        gid = gid,
+        justCreated = justCreated,
+        componentContext = componentContext,
+        dependencies = object : ArtDetails.Dependencies, ArtMain.Dependencies by dependencies {
+            override val userId: String = "test123"
+            override val output: Consumer<ArtDetails.Output> = output
+        }
+    )
+}
+
