@@ -12,6 +12,6 @@ internal interface ArtMainStore : Store<Intent, State, Nothing> {
 
     data class State(
         val items: List<GroupItem> = emptyList(),
-        val text: String = ""
+        val userId: String = ""
     )
 }

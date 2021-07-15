@@ -7,6 +7,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import nikolam.artcorner.common.create.ArtCreate
 import nikolam.artcorner.common.data.GroupApi
 import nikolam.artcorner.common.details.ArtDetails
+import nikolam.artcorner.common.di.preference.PreferenceManager
 import nikolam.artcorner.common.main.integration.ArtMainComponent
 
 interface ArtMain {
@@ -20,7 +21,7 @@ interface ArtMain {
 
     data class Model(
         val items: List<GroupItem>,
-        val text: String
+        val userId: String
     )
 
     sealed class Child {
@@ -33,6 +34,7 @@ interface ArtMain {
         val groupApi : GroupApi
         val userId : String
         val storeFactory: StoreFactory
+        val preferences: PreferenceManager
     }
 }
 

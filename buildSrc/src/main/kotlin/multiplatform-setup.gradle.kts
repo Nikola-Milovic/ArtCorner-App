@@ -10,9 +10,9 @@ kotlin {
     android()
     ios()
 
-    js(IR) {
-        browser()
-    }
+//    js(IR) {
+//        browser()
+//    }
 
     sourceSets {
         named("commonMain") {

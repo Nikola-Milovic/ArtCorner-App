@@ -17,7 +17,7 @@ interface ArtRoot {
 
     interface Dependencies {
         val groupApi: GroupApi
-        val preferenceManager : PreferenceManager
+        val preferences : PreferenceManager
         val storeFactory: StoreFactory
     }
 }

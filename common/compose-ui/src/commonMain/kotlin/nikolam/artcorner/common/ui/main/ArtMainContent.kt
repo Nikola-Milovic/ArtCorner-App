@@ -83,6 +83,6 @@ private fun Item(
     onItemClicked: (gid: String) -> Unit
 ) {
     Box(modifier = Modifier.padding(10.dp).clickable { onItemClicked(item.gid) }) {
-        Text(item.text)
+        Text(item.ownerId)
     }
 }

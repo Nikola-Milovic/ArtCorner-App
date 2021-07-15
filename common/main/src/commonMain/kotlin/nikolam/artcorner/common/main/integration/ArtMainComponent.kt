@@ -41,7 +41,8 @@ class ArtMainComponent(
     private val store =
         instanceKeeper.getStore {
             ArtMainStoreProvider(
-                storeFactory = storeFactory
+                storeFactory = storeFactory,
+                preferences = preferences
             ).provide()
         }
 

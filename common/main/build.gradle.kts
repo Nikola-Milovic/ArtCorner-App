@@ -14,6 +14,7 @@ kotlin {
                 implementation(project(":common:create"))
                 implementation(project(":common:details"))
                 implementation(project(":common:data"))
+                implementation(project(":common:di"))
 //                implementation(project(":common:database"))
                 implementation(Deps.Decompose.decompose)
                 implementation(Deps.MVIKotlin.mvikotlin)

@@ -1,8 +1,12 @@
 package nikolam.artcorner.common.ui.details
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -20,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import nikolam.artcorner.common.details.ArtDetails
-import nikolam.artcorner.common.ui.utils.KMPClickableIcon
+import nikolam.artcorner.common.ui.utils.KMPIcon
 import nikolam.artcorner.common.ui.utils.copyToClipboard
 
 @Composable
@@ -46,8 +50,10 @@ fun ArtDetailsContent(component: ArtDetails) {
 }
 
 @Composable
-fun GroupOwnerContent(model : ArtDetails.Model) {
+fun GroupOwnerContent(model: ArtDetails.Model) {
     val uriHandler = LocalUriHandler.current
+
+    val copyClipboard = copyToClipboard("Discord Command", "!register ${model.gid}")
 
     val instructionString = createInstructionText()
 
@@ -72,22 +78,24 @@ fun GroupOwnerContent(model : ArtDetails.Model) {
             }
         )
 
-        Row(verticalAlignment = Alignment.CenterVertically){
-            Text("?register ${model.gid}")
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable {
+            copyClipboard()
+        }) {
+            Text("!register ${model.gid}")
             Spacer(Modifier.size(20.dp))
-            IconButton(onClick = {
-            }){
-                KMPClickableIcon("clipboard", Modifier,
-                    null, "Copy command"
-                ) {  }
-            }
+
+            KMPIcon(
+                "clipboard", Modifier,
+                null, "Copy command"
+            )
+
         }
         Spacer(modifier = Modifier.size(40.dp))
         Text(explanationString)
     }
 }
 
-fun createInstructionText() : AnnotatedString {
+fun createInstructionText(): AnnotatedString {
     return buildAnnotatedString {
 
         pushStyle(SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold, fontSize = 20.sp))
@@ -135,6 +143,6 @@ fun createInstructionText() : AnnotatedString {
             end = s2End
         )
 
-        append("3) Copy and paste this command into the general channel in your new discord server")
+        append("3) Click on the command to copy it, and then paste it into the discord server you just created")
     }
 }

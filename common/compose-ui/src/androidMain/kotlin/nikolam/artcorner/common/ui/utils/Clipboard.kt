@@ -8,11 +8,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat.getSystemService
 
 @Composable
-actual fun copyToClipboard(label : String, text : String){
+actual fun copyToClipboard(label: String, text: String): () -> Unit {
     val context = LocalContext.current
 
+    return { context.copyToClipboard(label, text) }
+}
+
+private fun Context.copyToClipboard(label: String, text: String) {
     val clipboard: ClipboardManager? =
-        getSystemService(context, ClipboardManager::class.java)
+        getSystemService(this, ClipboardManager::class.java)
     val clip = ClipData.newPlainText(label, text)
     clipboard?.setPrimaryClip(clip)
 }

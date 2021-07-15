@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             componentContext = componentContext,
             dependencies = object : ArtRoot.Dependencies {
                 override val groupApi = this@MainActivity.groupApi
-                override val preferenceManager: PreferenceManager = this@MainActivity.preferenceManager
+                override val preferences: PreferenceManager = this@MainActivity.preferenceManager
                 override val storeFactory: StoreFactory = LoggingStoreFactory(DefaultStoreFactory)
             },
         )

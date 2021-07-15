@@ -7,6 +7,6 @@ internal val stateToModel: (State) -> Model =
     {
         Model(
             items = it.items,
-            text = it.text
+            userId = it.userId
         )
     }

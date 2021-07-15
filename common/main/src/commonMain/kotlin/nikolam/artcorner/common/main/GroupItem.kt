@@ -2,5 +2,5 @@ package nikolam.artcorner.common.main
 
 data class GroupItem(
     val gid: String = "",
-    val text: String = ""
+    val ownerId: String = ""
 )
