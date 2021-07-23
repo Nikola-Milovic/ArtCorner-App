@@ -7,5 +7,7 @@ include(
     ":common:details",
     ":android",
     ":common:di",
-    ":common:data"
+    ":common:data",
+    ":common:auth",
+    ":common:amplify"
 )

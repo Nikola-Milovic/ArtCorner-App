@@ -13,6 +13,7 @@ interface ArtRoot {
 
     sealed class Child {
         data class Main(val component: ArtMain) : Child()
+        data class Auth(val component: ArtMain) : Child()
     }
 
     interface Dependencies {

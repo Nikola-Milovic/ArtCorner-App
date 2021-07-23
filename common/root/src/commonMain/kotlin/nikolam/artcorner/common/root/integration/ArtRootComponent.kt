@@ -3,6 +3,7 @@ package nikolam.artcorner.common.root.integration
 import co.touchlab.stately.ensureNeverFrozen
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.RouterState
+import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router
 import com.arkivanov.decompose.statekeeper.Parcelable
 import com.arkivanov.decompose.statekeeper.Parcelize
@@ -15,6 +16,7 @@ import nikolam.artcorner.common.root.ArtRoot.Child
 class ArtRootComponent internal constructor(
     componentContext: ComponentContext,
     private val artMain: (ComponentContext) -> ArtMain,
+    private val artAuth: (ComponentContext) -> ArtMain,
 ) : ArtRoot, ComponentContext by componentContext {
 
     constructor(
@@ -24,6 +26,9 @@ class ArtRootComponent internal constructor(
         componentContext = componentContext,
         artMain = { childContext ->
             artMain(componentContext = childContext, dependencies = dependencies)
+        },
+        artAuth = {childContext ->
+            artAuth(componentContext = childContext, dependencies = dependencies)
         }
     ) {
         instanceKeeper.ensureNeverFrozen()
@@ -44,11 +49,15 @@ class ArtRootComponent internal constructor(
     ): Child =
         when (configuration) {
             is Configuration.Main -> Child.Main(artMain(componentContext))
+            is Configuration.Auth -> Child.Auth(artAuth(componentContext))
         }
 
     private sealed class Configuration : Parcelable {
         @Parcelize
         object Main : Configuration()
+
+        @Parcelize
+        object Auth : Configuration()
     }
 }
 
@@ -58,8 +67,16 @@ private fun artMain(
 ): ArtMain {
     return ArtMainFactory(
         componentContext = componentContext,
-        dependencies = object : ArtMain.Dependencies, ArtRoot.Dependencies by dependencies {
-            override val userId: String = "test123"
-        }
+        dependencies = object : ArtMain.Dependencies, ArtRoot.Dependencies by dependencies {}
+    )
+}
+
+private fun artAuth(
+    componentContext: ComponentContext,
+    dependencies: ArtRoot.Dependencies
+): ArtMain {
+    return ArtMainFactory(
+        componentContext = componentContext,
+        dependencies = object : ArtMain.Dependencies, ArtRoot.Dependencies by dependencies {}
     )
 }

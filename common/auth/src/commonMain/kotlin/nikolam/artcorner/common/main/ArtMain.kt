@@ -32,6 +32,7 @@ interface ArtMain {
 
     interface Dependencies{
         val groupApi : GroupApi
+        val userId : String
         val storeFactory: StoreFactory
         val preferences: PreferenceManager
     }

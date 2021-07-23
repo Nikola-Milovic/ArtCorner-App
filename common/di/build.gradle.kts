@@ -21,8 +21,4 @@ kotlin {
             }
         }
     }
-
-    targets.getByName<KotlinNativeTarget>("iosX64").compilations.forEach {
-        it.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
-    }
 }
